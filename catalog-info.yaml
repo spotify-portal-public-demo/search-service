@@ -34,3 +34,7 @@ spec:
   owner: "group:default/discovery"
   providesApis:
     - search-service-grpc
+  consumesApis:
+    - spotify-portal-public-demo.content_track.track
+    - spotify-portal-public-demo.content_album.album
+    - spotify-portal-public-demo.content_artist.artist
