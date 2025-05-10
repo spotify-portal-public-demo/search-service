@@ -38,3 +38,5 @@ spec:
     - spotify-portal-public-demo.content_track.track
     - spotify-portal-public-demo.content_album.album
     - spotify-portal-public-demo.content_artist.artist
+  dependsOn:
+    - resource:search-service-db
