@@ -1,4 +1,16 @@
 apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: search-service-grpc
+  description: "gRPC API for entity search"
+spec:
+  type: grpc
+  lifecycle: production
+  owner: "group:default/discovery"
+  definition:
+    $text: ./src/main/proto/search.proto
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: search-service
@@ -19,3 +31,9 @@ spec:
   lifecycle: experimental
   owner: "group:default/discovery"
   system: "system:default/search"
+  providesApis:
+    - search-service-grpc
+  consumesApis:
+    - spotify-portal-public-demo.content_track.track
+    - spotify-portal-public-demo.content_album.album
+    - spotify-portal-public-demo.content_artist.artist
