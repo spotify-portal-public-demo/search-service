@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: search-service
-          image: ghcr.io/spotify-portal-public-demo/search-service:main-3e6beb16-1746909526 # {"$imagepolicy": "flux-system:search-service"}
+          image: ghcr.io/spotify-portal-public-demo/search-service:main-1a477255-1746909910 # {"$imagepolicy": "flux-system:search-service"}
           imagePullPolicy: Always
           resources:
             requests:
