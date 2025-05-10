@@ -23,12 +23,13 @@ metadata:
     github.com/project-slug: spotify-portal-public-demo/search-service
     sonarqube.org/project-key: spotify-portal-public-demo_search-service
     grafana/dashboard-selector: search-service
+    grafana/alert-label-selector: service_name=search-service
     backstage.io/kubernetes-id: search-service
     backstage.io/kubernetes-namespace: search-service
     backstage.io/kubernetes-label-selector: app=search-service
 spec:
   type: service
-  lifecycle: experimental
+  lifecycle: production
   owner: "group:default/discovery"
   system: "system:default/search"
   providesApis:
