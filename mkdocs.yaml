@@ -1,0 +1,8 @@
+site_name: "search-service"
+site_description: "gRPC service for entity search"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core

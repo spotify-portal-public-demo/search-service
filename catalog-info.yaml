@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: search-service
+  description: "gRPC service for entity search"
+  tags:
+    - java
+    - grpc
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: spotify-portal-public-demo/search-service
+    sonarqube.org/project-key: spotify-portal-public-demo_search-service
+    grafana/dashboard-selector: search-service
+    backstage.io/kubernetes-id: search-service
+    backstage.io/kubernetes-namespace: search-service
+    backstage.io/kubernetes-label-selector: app=search-service
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "group:default/discovery"
+  system: "system:default/search"
