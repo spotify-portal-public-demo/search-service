@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.3</version>
+    <version>3.5.16</version>
     <relativePath/>
     <!-- lookup parent from repository -->
   </parent>
@@ -28,7 +28,9 @@
     <url/>
   </scm>
   <properties>
-    <java.version>21</java.version>
+    <java.version>26</java.version>
+    <maven.compiler.release>26</maven.compiler.release>
+    <jdk26.home>${user.home}/.m2/wrapper/dists/temurin-jdk-26.0.2.1+1</jdk26.home>
     <grpc.version>1.70.0</grpc.version>
     <protobuf-java.version>3.25.6</protobuf-java.version>
     <spring-grpc.version>0.5.0</spring-grpc.version>
@@ -110,5 +112,55 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>bootstrap-jdk-26</id>
+      <activation>
+        <jdk>[,26)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>bootstrap-jdk-26</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <exec executable="sh" failonerror="true">
+                      <env key="JDK26_HOME" value="${jdk26.home}"/>
+                      <arg value="${project.basedir}/.mvn/bootstrap-jdk-26.sh"/>
+                    </exec>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <fork>true</fork>
+              <executable>${jdk26.home}/bin/javac</executable>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <jvm>${jdk26.home}/bin/java</jvm>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

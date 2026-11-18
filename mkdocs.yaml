@@ -1,5 +1,5 @@
 site_name: "search-service"
-site_description: "gRPC service for entity search"
+site_description: "Java 26 gRPC service for entity search"
 
 nav:
   - Introduction: index.md

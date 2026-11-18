@@ -142,6 +142,31 @@ distributionUrlNameMain="${distributionUrlNameMain%-bin}"
 MAVEN_USER_HOME="${MAVEN_USER_HOME:-${HOME}/.m2}"
 MAVEN_HOME="${MAVEN_USER_HOME}/wrapper/dists/${distributionUrlNameMain-}/$(hash_string "$distributionUrl")"
 
+bootstrap_java_26() {
+  [ "${MVNW_BOOTSTRAP_JDK_26-true}" != false ] || return 0
+
+  if set_java_home >/dev/null 2>&1; then
+    javaMajorVersion=$("$JAVACMD" -version 2>&1 | sed -n 's/.*version "\([0-9][0-9]*\).*/\1/p' | head -n 1)
+    if [ -n "${javaMajorVersion-}" ] && [ "$javaMajorVersion" -ge 26 ]; then
+      return 0
+    fi
+  fi
+
+  case "$0" in
+  */*) mvnwDir=${0%/*} ;;
+  *) mvnwDir=. ;;
+  esac
+  jdkHome=$(MAVEN_USER_HOME="$MAVEN_USER_HOME" "$mvnwDir/.mvn/bootstrap-jdk-26.sh") || die "failed to install JDK 26"
+  [ -n "$jdkHome" ] || return 0
+
+  JAVA_HOME="$jdkHome"
+  JAVACMD="$JAVA_HOME/bin/java"
+  JAVACCMD="$JAVA_HOME/bin/javac"
+  export JAVA_HOME
+}
+
+bootstrap_java_26
+
 exec_maven() {
   unset MVNW_VERBOSE MVNW_USERNAME MVNW_PASSWORD MVNW_REPOURL || :
   exec "$MAVEN_HOME/bin/$MVN_CMD" "$@" || die "cannot exec $MAVEN_HOME/bin/$MVN_CMD"

@@ -1,4 +1,4 @@
-FROM amazoncorretto:21-alpine
+FROM amazoncorretto:26-alpine
 ENTRYPOINT ["/usr/bin/search-service.sh"]
 
 COPY search-service.sh /usr/bin/search-service.sh

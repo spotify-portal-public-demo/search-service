@@ -4,6 +4,8 @@ gRPC service for entity search
 
 ## Getting started
 
+This service targets Java 26. Maven builds use Java 26 when available and bootstrap a cached Temurin JDK 26 on Linux x64 when the default JDK is older.
+
 Start write your documentation by adding more markdown (.md) files to this folder (/docs) or replace the content in this file.
 
 ## Table of Contents
